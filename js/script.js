@@ -44,8 +44,10 @@ const buttonInput = document.querySelector(".mlp-btn-input")
 //numeri randmo in pagina:
 const randomNumberOutput = document.querySelector("h2");
 // secondi per il gioco:
-let seconds = 5;
+let seconds = 10;
 let secondsInMs = seconds * 1000;
+// risultato
+let result = document.querySelector(".mlp-result");
 
 
 const randomNumber = [];
@@ -81,12 +83,18 @@ buttonInput.addEventListener("click", function () {
     // console.log(inputValues);
     const inputFound = [];
 
+
+    const numerFound = [];
     let counter = 0;
 
     for (let i = 0; i < randomNumber.length; i++) {
 
         if (inputValues.includes(randomNumber[i])) {
+            numerFound.push(randomNumber[i]);
             counter++;
         }
-    } console.log(counter);
+    } buttonInput.disabled = true;
+    // console.log(counter);
+    // console.log(numerFound);
+    result.innerText = `Hai trovato ${counter} numeri: ${numerFound.join(', ')}`;
 })
