@@ -38,19 +38,25 @@ const secondInput = document.getElementById("second-number");
 const thridInput = document.getElementById("thrid-number");
 const fourthInput = document.getElementById("fourth-number");
 const fifthInput = document.getElementById("fifth-number");
+const dispInput = document.querySelector(".mlp-input-user");
+const buttonInput = document.querySelector(".mlp-btn-input")
 // console.log(firstInput, secondInput, thridInput, fourthInput, fifthInput);
 //numeri randmo in pagina:
 const randomNumberOutput = document.querySelector("h2");
 // secondi per il gioco:
-let seconds = 10;
+let seconds = 5;
 let secondsInMs = seconds * 1000;
 
-const randomNumber = [];
 
+const randomNumber = [];
+//timeout per far sparire i numeri random:
 setTimeout(function () {
     randomNumberOutput.classList.add("d-none");
-}, secondsInMs);
+    dispInput.classList.remove("d-none");
+    buttonInput.classList.remove("d-none");
 
+}, secondsInMs);
+//ciclo che genera i 5 numeri casuali:
 for (let i = 0; i < 5; i++) {
     let generatorNumber = Math.floor(Math.random() * 99) + 1;
     if (!randomNumber.includes(generatorNumber)) {
@@ -58,8 +64,29 @@ for (let i = 0; i < 5; i++) {
     } else {
         i--;
     }
-
 }
 // console.log(randomNumber);
-
+//output in pagina dei numeri:
 randomNumberOutput.innerHTML = randomNumber.join(", ");
+
+buttonInput.addEventListener("click", function () {
+    //prendo i valori inseriti:
+    const inputValues = [
+        Number(firstInput.value),
+        Number(secondInput.value),
+        Number(thridInput.value),
+        Number(fourthInput.value),
+        Number(fifthInput.value)
+    ];
+    // console.log(inputValues);
+    const inputFound = [];
+
+    let counter = 0;
+
+    for (let i = 0; i < randomNumber.length; i++) {
+
+        if (inputValues.includes(randomNumber[i])) {
+            counter++;
+        }
+    } console.log(counter);
+})
